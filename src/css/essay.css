@@ -1,0 +1,244 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+/* Create three equal columns that floats next to each other */
+.essay-left {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  height: 100vh;
+  content: "";
+  display: table;
+  clear: both;
+  margin-top: 10%;
+}
+.essay-right {
+  float: left;
+  width: 80%;
+  padding: 15px;
+}
+
+.strong-essay {
+  float: left;
+  width: 50%;
+  padding: 15px;
+  content: "";
+  display: table;
+  clear: both;
+}
+.weak-essay {
+  float: left;
+  width: 50%;
+  padding: 15px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* CSS for the container div */
+.container {
+  width: 100%; /* Set the width of the container to 100% */
+  max-width: 400px; /* Set a maximum width if needed */
+  position: fixed; /* Positioning context for the circle */
+}
+
+/* CSS for the circle div */
+.circle {
+  width: 90%; /* Set the width of the circle as a percentage */
+  padding-top: 90%; /* Maintain a 1:1 aspect ratio (height equal to width) */
+  margin-left: 10%;
+  background-color: #ff5055; /* Background color of the circle */
+  border-radius: 50%; /* Create a circular shape */
+  position: absolute; /* Position the circle inside the container */
+  top: 50%; /* Center the circle vertically */
+  left: 1%; /* Center the circle horizontally */
+  transform: translate(-50%, -50%); /* Center the circle precisely */
+}
+
+/* Additional styles for the circle (you can customize as needed) */
+.circle::before {
+  content: ''; /* Empty content to maintain aspect ratio */
+  display: block; /* Make it a block-level element */
+}
+
+/* Example styles for text inside the circle */
+.circle p {
+  position: absolute;
+  text-align: center;
+  margin-top: -45%;
+  margin-left: 40%;
+  color: #000000;
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 1.5;
+  /* Add any other text styles you want */
+}
+.top-header {
+  border: 4px solid #000000;
+  border-radius: 10px;
+  background-color: #fff6e5;
+}
+.top-header p {
+  color: #000000;
+  font-weight: bold;
+}
+.bottom-footer p {
+  color: #000000;
+  font-weight: bold;
+}
+
+.flex-container {
+  margin-top: 10%;
+  display: flex;
+  width: 40%;
+  border: 6px solid darkgray;
+  border-radius: 10px;
+  margin-left: 30%;
+}
+.flex-container > div {
+  color: white;
+  width: 40px;
+  margin: 5px;
+  height: 50px;
+  transform: skew(-10deg);
+}
+
+
+.bottom-footer {
+  margin-top: 5%;
+  border: none;
+  border-radius: 30px;
+  padding: 10px;
+  background-color: #ff5055;
+}
+
+
+.left-topics {
+  height: 60vh;
+  background-color: #fff6e5;
+  padding: 0;
+  border: 4px solid #333231;
+}
+
+.left-topics-header {
+  width: 100%;
+  height: 20px;
+  border: 2px solid #333231;
+  margin-top: 20px;
+}
+
+.left-topics-header-filled-dot {
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.left-topics-header-dot {
+  width: 10px;
+  height: 10px;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.left-topics-item {
+  background-color: #3498db;
+  float: left;
+  width: 50%;
+  margin-bottom: 5%;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.inner-topic {
+  width: 100%;
+  height: 100%;
+  background-color: tomato;
+}
+
+
+
+.platte-tomato {
+  background-color: tomato;
+}
+.platte-orange {
+  background-color: orange;
+}
+.platte-orange {
+  background-color: yellow;
+}
+.platte-lightgreen {
+  background-color: lightgreen;
+}
+.platte-mediumseagreen {
+  background-color: mediumseagreen;
+}
+.platte-violet {
+  background-color: violet;
+}
+.platte-lightblue {
+  background-color: lightskyblue;
+}
+
+
+/* CSS for the quadrilateral div */
+.quadrilateral {
+  width: 200px; /* Set the width of the quadrilateral */
+  height: 100px; /* Set the height of the quadrilateral */
+  background-color: #3498db; /* Set the background color to the desired color */
+  position: relative; /* Make it a positioned element */
+}
+
+/* Pseudo-elements to create the additional sides */
+.quadrilateral::before,
+.quadrilateral::after {
+  content: ''; /* Empty content */
+  position: absolute; /* Position these elements absolutely within the quadrilateral */
+  width: 0; /* Set width to 0 */
+  border: 50px solid transparent; /* Set border to create the angled sides */
+}
+
+/* Adjust the positioning of the pseudo-elements to create the desired angles */
+.quadrilateral::before {
+  top: 0;
+  left: 0;
+  border-right-color: #3498db; /* Match the border color to the quadrilateral's background */
+}
+
+.quadrilateral::after {
+  top: 0;
+  right: 0;
+  border-left-color: #3498db; /* Match the border color to the quadrilateral's background */
+}
+
+
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) {
+  .essay-left, .essay-right, .strong-essay, .weak-essay {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:1000px) {
+  .flex-container {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width:1300px) {
+  .left-topics-item {
+    width: 100%;
+  }
+}
