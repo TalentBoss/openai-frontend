@@ -40,10 +40,10 @@ export const Essay = () => {
     <div className="row">
       <div className="container">
         <div className="circle">
-          <p>Module 1: Madlibs style essay generation</p>
+          <p>MODULE 1: MADLIBS STYLE ESSAY GENERATION</p>
         </div>
       </div>
-      <button onClick={ getData }>wwwwww</button>
+      <button onClick={ getData }>Get Essays</button>
       <div className="essay-left">
         <div className="row left-topics">
           <div className="row dot-series">

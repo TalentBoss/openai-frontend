@@ -77,13 +77,12 @@ body {
 /* Example styles for text inside the circle */
 .circle p {
   position: absolute;
-  text-align: center;
   margin-top: -45%;
   margin-left: 40%;
   color: #000000;
   font-weight: bold;
   font-size: 23px;
-  line-height: 1.5;
+  text-align: start;
   /* Add any other text styles you want */
 }
 .top-header {
