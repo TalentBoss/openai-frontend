@@ -1,0 +1,21 @@
+export default [
+  'polyglot',
+  'vegan',
+  'queer',
+  'artist',
+  'jazz enthusiast',
+  'photographer',
+  'chess player',
+  'rugby player',
+  'blogger',
+  'baker',
+  'cyclist',
+  'runner',
+  'soccer player',
+  'neurodiverse',
+  'debater',
+  'young republican',
+  'activist',
+  'influencer',
+  'dancer'
+]
