@@ -6,44 +6,57 @@ import axios from 'axios';
 
 import strongAttributes from "../utils/strong-attributes";
 import weakAttributes from "../utils/weak-attributes";
-import {random_item} from "../utils/random";
+import { random_item } from "../utils/random";
 import identity from "../utils/identity";
 import commonPrompts from "../utils/common-prompts";
 import wildcards from "../utils/wildcards";
+import Dropdown from "./dropdown";
+import EssayContent from "./essay-content";
 
-export const Essay = () => {
+const Essay = () => {
   const [ essayData, setEssayData ] = useState('');
   const [ commonPrompt, setCommonPrompt ] = useState('');
 
-  function getData() {
+  function getData(selectedPrompt) {
+    setEssayData('');
+    console.log(selectedPrompt)
+    setCommonPrompt(selectedPrompt)
     const request = {
       strong_attribute: random_item(strongAttributes),
       weak_attribute: random_item(weakAttributes),
       identity: random_item(identity),
       wildcard: random_item(wildcards),
-      common_prompt: random_item(commonPrompts)
+      common_prompt: selectedPrompt
     }
-
-    setCommonPrompt(request.common_prompt);
 
     axios.post("/openai/get-response", request)
       .then((response) => {
         const gptResponse =response.data;
-        setEssayData(gptResponse.data.content)
+        setEssayData(gptResponse.data) //should changed as content
       }).catch((error) => {
       if (error.response) {
         console.log(error.response)
       }
     })
   }
+
+  const dropdownProps = {
+    options: commonPrompts,
+    handleSelect: event => {
+      if (event.target.value !== 'empty') {
+        getData(event.target.value)
+      }
+    }
+  }
+
+  const essayContentHandle = currentIndex => {
+    console.log("typeWriterHandle", currentIndex);
+
+  }
+
+
   return (
     <div className="row">
-      <div className="container">
-        <div className="circle">
-          <p>MODULE 1: MADLIBS STYLE ESSAY GENERATION</p>
-        </div>
-      </div>
-      <button onClick={ getData }>Get Essays</button>
       <div className="essay-left">
         <div className="row left-topics">
           <div className="row dot-series">
@@ -79,10 +92,8 @@ export const Essay = () => {
 
       <div className="essay-right">
         <div className="row">
-          <div className="top-header">
-            <p>Student Description generated from left Common Essay Prompt: { commonPrompt.toUpperCase() }
-            </p>
-          </div>
+          <Dropdown {...dropdownProps}/>
+
           <div className="row main-content">
             <div className="strong-essay essay-dialog">
               <div className="row three-icons-bar">
@@ -100,9 +111,9 @@ export const Essay = () => {
 
               </div>
               <div className="essay-content">
-                <p>{essayData.split('Weak Essay:')[0]}</p>
+                <EssayContent text={essayData.split('Weak Essay:')[0]} delay={10} handle={value => essayContentHandle(value)}/>
               </div>
-              <StarRating />
+              <StarRating essay={essayData}/>
             </div>
             <div className="weak-essay essay-dialog">
               <div className="row three-icons-bar">
@@ -120,25 +131,19 @@ export const Essay = () => {
 
               </div>
               <div className="essay-content">
-                <p> { essayData.split('Weak Essay:')[1] ? "Weak Essay:" + essayData.split('Weak Essay:')[1] : ""}</p>
+                <EssayContent text={ essayData.split('Weak Essay:')[1] ? "Weak Essay:" + essayData.split('Weak Essay:')[1] : ""} delay={10} handle={value => essayContentHandle(value)} />
               </div>
-              <StarRating />
+
             </div>
           </div>
           <div className="row platte">
             <div className="flex-container">
-              <div className="platte-tomato"></div>
-              <div className="platte-orange"></div>
-              <div className="platte-orange"></div>
-              <div className="platte-lightgreen"></div>
-              <div className="platte-mediumseagreen"></div>
-              <div className="platte-violet"></div>
+              <div className="platte-item platte-tomato"></div>
+              <div className="platte-item platte-orange"></div>
+              <div className="platte-item platte-lightgreen"></div>
+              <div className="platte-item platte-mediumseagreen"></div>
+              <div className="platte-item platte-violet"></div>
             </div>
-          </div>
-          <div className="bottom-footer">
-            <p>
-              This will be a rapid fire example generator. There is an interactive component with the prompt buttons. The sudent will rate the good essays to see what kind of writing style they like - sort of like a buzzfeed quiz
-            </p>
           </div>
         </div>
 
@@ -147,3 +152,5 @@ export const Essay = () => {
     </div>
   )
 }
+
+export default Essay

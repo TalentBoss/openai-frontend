@@ -15,7 +15,6 @@ body {
   content: "";
   display: table;
   clear: both;
-  margin-top: 10%;
 }
 .essay-right {
   float: left;
@@ -117,10 +116,11 @@ body {
 .essay-content {
   padding: 20px;
 }
-.essay-content > p {
+.essay-content > span {
   justify-content: flex-start;
   align-content: center;
-  font-family: "Courier New";
+  font-family: "Arial Black";
+  font-size: 18px;
 }
 
 .bottom-footer {
@@ -136,7 +136,6 @@ body {
   height: auto;
   background-color: #fff6e5;
   padding: 0;
-  margin-top: 10vh;
   border: 3px solid #333231;
   border-radius: 10px;
 }
@@ -282,9 +281,6 @@ body {
 }
 
 
-
-
-
 .platte-tomato {
   background-color: tomato;
 }
@@ -292,7 +288,7 @@ body {
   background-color: orange;
 }
 .platte-orange {
-  background-color: yellow;
+  background-color: dodgerblue;
 }
 .platte-lightgreen {
   background-color: lightgreen;
@@ -304,7 +300,12 @@ body {
   background-color: violet;
 }
 .platte-lightblue {
-  background-color: lightskyblue;
+  background-color: lightseagreen;
+}
+
+.platte-item:hover {
+  opacity: 70%;
+  cursor: pointer;
 }
 
 

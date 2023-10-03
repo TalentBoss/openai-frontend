@@ -1,0 +1,14 @@
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+
+
+}
+.custom-select select {
+  height: 50px;
+  width: 100%;
+  font-family: "Franklin Gothic Medium";
+  font-size: 15px;
+  padding: 10px;
+  font-weight: bold;
+}
