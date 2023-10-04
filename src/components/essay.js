@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import strongAttributes from "../utils/strong-attributes";
 import weakAttributes from "../utils/weak-attributes";
-import { random_item } from "../utils/random";
+import {getRandomSubarray, random_item} from "../utils/random";
 import identity from "../utils/identity";
 import commonPrompts from "../utils/common-prompts";
 import wildcards from "../utils/wildcards";
@@ -16,6 +16,8 @@ import EssayContent from "./essay-content";
 const Essay = () => {
   const [ essayData, setEssayData ] = useState('');
   const [ commonPrompt, setCommonPrompt ] = useState('');
+  const [ identityArray, setIdentityArray] = useState(getRandomSubarray(identity, 5));
+  const [ wildcardArray, setWildCardArray] = useState(getRandomSubarray(wildcards, 5));
 
   function getData(selectedPrompt) {
     setEssayData('');
@@ -54,6 +56,13 @@ const Essay = () => {
 
   }
 
+  const getRandomIdentity = () => {
+    setIdentityArray(getRandomSubarray(identity, 5));
+  }
+
+  const getRandomWildCard = () => {
+    setWildCardArray(getRandomSubarray(wildcards, 5));
+  }
 
   return (
     <div className="row">
@@ -65,27 +74,57 @@ const Essay = () => {
             <div className="left-topics-header-dot"></div>
           </div>
           <div className="left-topics-header">
+          </div>
+          <div className="row left-topics-item">
+            <div className="inner-topic-generate" onClick={ getRandomIdentity }>
+              <p>Identity</p>
+            </div>
+            {
+              identityArray.map((item) => (
+                <div key={item} className="inner-topic">
+                  <p>{item}</p>
+                </div>
+              ))
+            }
+
+          </div>
+        </div>
+
+        <div className="row left-topics">
+          <div className="row dot-series">
+            <div className="left-topics-header-filled-dot"></div>
+            <div className="left-topics-header-dot"></div>
+            <div className="left-topics-header-dot"></div>
+          </div>
+          <div className="left-topics-header">
 
           </div>
           <div className="row left-topics-item">
-            <div className="inner-topic">
-              <p>ASPCA Volunteer</p>
+            <div className="inner-topic-generate" onClick={ getRandomWildCard }>
+              <p>Wild Cards</p>
             </div>
-            <div className="inner-topic">
-              <p>Juvenile Detention</p>
-            </div>
-            <div className="inner-topic">
-              <p>ASPCA Volunteer</p>
-            </div>
-            <div className="inner-topic">
-              <p>Juvenile Detention</p>
-            </div>
-            <div className="inner-topic">
-              <p>ASPCA Volunteer</p>
-            </div>
-            <div className="inner-topic-generate">
-              <p>Generate</p>
-            </div>
+            {
+              wildcardArray.map((wildcard) => (
+                <div key={wildcard} className="inner-topic">
+                  <p>{wildcard}</p>
+                </div>
+              ))
+            }
+            {/*<div className="inner-topic">*/}
+            {/*  <p>ASPCA Volunteer</p>*/}
+            {/*</div>*/}
+            {/*<div className="inner-topic">*/}
+            {/*  <p>Juvenile Detention</p>*/}
+            {/*</div>*/}
+            {/*<div className="inner-topic">*/}
+            {/*  <p>ASPCA Volunteer</p>*/}
+            {/*</div>*/}
+            {/*<div className="inner-topic">*/}
+            {/*  <p>Juvenile Detention</p>*/}
+            {/*</div>*/}
+            {/*<div className="inner-topic">*/}
+            {/*  <p>ASPCA Volunteer</p>*/}
+            {/*</div>*/}
           </div>
         </div>
       </div>
