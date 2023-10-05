@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import StarRating from "./stars";
 import '../css/essay.css';
@@ -7,26 +7,37 @@ import axios from 'axios';
 import strongAttributes from "../utils/strong-attributes";
 import weakAttributes from "../utils/weak-attributes";
 import {getRandomSubarray, random_item} from "../utils/random";
-import identity from "../utils/identity";
+import identities from "../utils/identity";
 import commonPrompts from "../utils/common-prompts";
 import wildcards from "../utils/wildcards";
 import Dropdown from "./dropdown";
 import EssayContent from "./essay-content";
 
 const Essay = () => {
+  const [ identity, setIdentity ] = useState('');
+  const [ wildcard, setWildcard ] = useState('');
+
   const [ essayData, setEssayData ] = useState('');
   const [ commonPrompt, setCommonPrompt ] = useState('');
-  const [ identityArray, setIdentityArray] = useState(getRandomSubarray(identity, 5));
+
+  const [ identityArray, setIdentityArray] = useState(getRandomSubarray(identities, 5));
   const [ wildcardArray, setWildCardArray] = useState(getRandomSubarray(wildcards, 5));
 
-  function getData(selectedPrompt) {
+  useEffect(() => {
+
+  }, []);
+
+
+  const getData = (selectedPrompt) => {
     setEssayData('');
-    console.log(selectedPrompt)
+
     setCommonPrompt(selectedPrompt)
+    console.log("$$$$ ", selectedPrompt)
+    console.log("### ", commonPrompt)
     const request = {
       strong_attribute: random_item(strongAttributes),
       weak_attribute: random_item(weakAttributes),
-      identity: random_item(identity),
+      identity: random_item(identities),
       wildcard: random_item(wildcards),
       common_prompt: selectedPrompt
     }
@@ -57,12 +68,14 @@ const Essay = () => {
   }
 
   const getRandomIdentity = () => {
-    setIdentityArray(getRandomSubarray(identity, 5));
+    setIdentityArray(getRandomSubarray(identities, 5));
   }
 
   const getRandomWildCard = () => {
     setWildCardArray(getRandomSubarray(wildcards, 5));
   }
+
+
 
   return (
     <div className="row">
@@ -81,9 +94,8 @@ const Essay = () => {
             </div>
             {
               identityArray.map((item) => (
-                <div key={item} className="inner-topic">
-                  <p>{item}</p>
-                </div>
+                (item === identity) ? <div key={item} className="inner-topic" onClick={()=> setIdentity(item) }><p className="inner-topic-focus">{item}</p></div> :
+                    <div key={item} className="inner-topic" onClick={()=> setIdentity(item)}><p className="inner-topic-normal">{item}</p></div>
               ))
             }
 
@@ -104,27 +116,11 @@ const Essay = () => {
               <p>Wild Cards</p>
             </div>
             {
-              wildcardArray.map((wildcard) => (
-                <div key={wildcard} className="inner-topic">
-                  <p>{wildcard}</p>
-                </div>
+              wildcardArray.map((item) => (
+                (item === wildcard) ? <div key={item} className="inner-topic" onClick={()=> setWildcard(item) }><p className="inner-topic-focus">{item}</p></div> :
+                    <div key={item} className="inner-topic" onClick={()=> setWildcard(item)}><p className="inner-topic-normal">{item}</p></div>
               ))
             }
-            {/*<div className="inner-topic">*/}
-            {/*  <p>ASPCA Volunteer</p>*/}
-            {/*</div>*/}
-            {/*<div className="inner-topic">*/}
-            {/*  <p>Juvenile Detention</p>*/}
-            {/*</div>*/}
-            {/*<div className="inner-topic">*/}
-            {/*  <p>ASPCA Volunteer</p>*/}
-            {/*</div>*/}
-            {/*<div className="inner-topic">*/}
-            {/*  <p>Juvenile Detention</p>*/}
-            {/*</div>*/}
-            {/*<div className="inner-topic">*/}
-            {/*  <p>ASPCA Volunteer</p>*/}
-            {/*</div>*/}
           </div>
         </div>
       </div>
@@ -145,6 +141,9 @@ const Essay = () => {
                 <div className="common-icon relative">
                   <div className="close-mark"></div>
                 </div>
+                <div className="row essay-title">
+                  <span>Strong Essay</span>
+                </div>
               </div>
               <div className="essay-dialog-divider">
 
@@ -164,6 +163,9 @@ const Essay = () => {
                 </div>
                 <div className="common-icon relative">
                   <div className="close-mark"></div>
+                </div>
+                <div className="row essay-title">
+                  <span>Weak Essay</span>
                 </div>
               </div>
               <div className="essay-dialog-divider">
