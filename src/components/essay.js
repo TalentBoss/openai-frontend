@@ -34,23 +34,25 @@ const Essay = () => {
     setCommonPrompt(selectedPrompt)
     console.log("$$$$ ", selectedPrompt)
     console.log("### ", commonPrompt)
-    const request = {
+    if (identity !=='' && wildcard !== '') {
+      const request = {
       strong_attribute: random_item(strongAttributes),
       weak_attribute: random_item(weakAttributes),
-      identity: random_item(identities),
-      wildcard: random_item(wildcards),
+      identity: identity,
+      wildcard: wildcard,
       common_prompt: selectedPrompt
-    }
-
-    axios.post("/openai/get-response", request)
-      .then((response) => {
-        const gptResponse =response.data;
-        setEssayData(gptResponse.data) //should changed as content
-      }).catch((error) => {
-      if (error.response) {
-        console.log(error.response)
       }
-    })
+
+      axios.post("/openai/get-response", request)
+        .then((response) => {
+          const gptResponse =response.data;
+          setEssayData(gptResponse.data) //should be changed as content
+        }).catch((error) => {
+        if (error.response) {
+          console.log(error.response)
+        }
+      })
+    }
   }
 
   const dropdownProps = {
@@ -151,7 +153,7 @@ const Essay = () => {
               <div className="essay-content">
                 <EssayContent text={essayData.split('Weak Essay:')[0]} delay={10} handle={value => essayContentHandle(value)}/>
               </div>
-              <StarRating essay={essayData}/>
+              <StarRating />
             </div>
             <div className="weak-essay essay-dialog">
               <div className="row three-icons-bar">
