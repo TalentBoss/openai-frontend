@@ -8,6 +8,8 @@ const EssayChat = () => {
   useEffect(() => {
     const request = {
       content: 'how to send the data using ajax communication',
+      fullname: 'John Doe',
+      email: 'johndoe@outlook.com'
     }
     axios.post('/rating/set-rating', request)
       .then(response => {
